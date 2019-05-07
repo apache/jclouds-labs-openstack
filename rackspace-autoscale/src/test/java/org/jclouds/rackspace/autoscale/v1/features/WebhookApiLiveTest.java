@@ -248,7 +248,7 @@ public class WebhookApiLiveTest extends BaseAutoscaleApiLiveTest {
          WebhookApi webhookApi = api.getWebhookApi(region, g.getId(), g.getScalingPolicies().iterator().next().getId());
          Webhook webhook = webhookApi.create("test_execute", ImmutableMap.<String, Object>of("notes", "test metadata")).first().get();
 
-         assertTrue( AutoscaleUtils.execute(webhook.getAnonymousExecutionURI().get()) , " for " + webhook + " in " + region);
+         assertTrue( AutoscaleUtils.execute(webhook.getAnonymousExecutionURI().get()), " for " + webhook + " in " + region);
       }
    }
 
