@@ -33,7 +33,6 @@
   <version>2.3.0-SNAPSHOT</version>
   <name>jclouds Rackspace Cloud Queues US provider</name>
   <description>OpenStack Marconi implementation targeted to Rackspace Cloud Queues US</description>
-  <packaging>bundle</packaging>
 
   <properties>
     <test.rackspace-cloudqueues-us.endpoint>https://identity.api.rackspacecloud.com/v2.0/</test.rackspace-cloudqueues-us.endpoint>
@@ -42,8 +41,6 @@
     <test.rackspace-cloudqueues-us.identity>${test.rackspace-us.identity}</test.rackspace-cloudqueues-us.identity>
     <test.rackspace-cloudqueues-us.credential>${test.rackspace-us.credential}</test.rackspace-cloudqueues-us.credential>
     <test.rackspace-cloudqueues-us.template />
-    <jclouds.osgi.export>org.jclouds.rackspace.cloudqueues.us*;version="${project.version}"</jclouds.osgi.export>
-    <jclouds.osgi.import>org.jclouds*;version="${project.version}",*</jclouds.osgi.import>
   </properties>
 
   <repositories>

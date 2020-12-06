@@ -1,0 +1,2 @@
+Export-Package: \
+    org.jclouds.openstack.glance.*;version="${project.version}";-noimport:=true

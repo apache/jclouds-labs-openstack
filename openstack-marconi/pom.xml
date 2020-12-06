@@ -32,7 +32,6 @@
   <version>2.3.0-SNAPSHOT</version>
   <name>jclouds openstack-marconi api</name>
   <description>jclouds components to access an implementation of OpenStack Marconi</description>
-  <packaging>bundle</packaging>
 
   <properties>
     <!-- keystone endpoint -->
@@ -42,8 +41,6 @@
     <test.openstack-marconi.identity>FIXME_IDENTITY</test.openstack-marconi.identity>
     <test.openstack-marconi.credential>FIXME_CREDENTIALS</test.openstack-marconi.credential>
     <test.jclouds.keystone.credential-type>passwordCredentials</test.jclouds.keystone.credential-type>
-    <jclouds.osgi.export>org.jclouds.openstack.marconi.v1*;version="${project.version}"</jclouds.osgi.export>
-    <jclouds.osgi.import>org.jclouds*;version="${project.version}",*</jclouds.osgi.import>
   </properties>
 
   <repositories>
