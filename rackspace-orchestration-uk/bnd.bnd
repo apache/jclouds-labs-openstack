@@ -1,0 +1,2 @@
+Export-Package: \
+    org.jclouds.rackspace.orchestration.uk.*;version="${project.version}";-noimport:=true

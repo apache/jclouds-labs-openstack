@@ -32,7 +32,6 @@
   <version>2.3.0-SNAPSHOT</version>
   <name>Apache jclouds :: OpenStack :: Poppy API</name>
   <description>jclouds components to access an implementation of OpenStack Poppy</description>
-  <packaging>bundle</packaging>
 
   <properties>
     <!-- keystone endpoint -->
@@ -42,8 +41,6 @@
     <test.openstack-poppy.identity>FIXME_IDENTITY</test.openstack-poppy.identity>
     <test.openstack-poppy.credential>FIXME_CREDENTIALS</test.openstack-poppy.credential>
     <test.jclouds.keystone.credential-type>passwordCredentials</test.jclouds.keystone.credential-type>
-    <jclouds.osgi.export>org.jclouds.openstack.poppy.v1*;version="${project.version}"</jclouds.osgi.export>
-    <jclouds.osgi.import>org.jclouds*;version="${project.version}",*</jclouds.osgi.import>
   </properties>
 
   <dependencies>

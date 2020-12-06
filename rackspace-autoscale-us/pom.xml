@@ -32,7 +32,6 @@
   <version>2.3.0-SNAPSHOT</version>
   <name>jclouds Rackspace Auto Scale US Provider</name>
   <description>jclouds components to access Rackspace Autoscale</description>
-  <packaging>bundle</packaging>
 
   <properties>
     <!-- keystone endpoint -->
@@ -43,8 +42,6 @@
     <test.rackspace-autoscale.identity>FIXME_IDENTITY</test.rackspace-autoscale.identity>
     <test.rackspace-autoscale.credential>FIXME_CREDENTIALS</test.rackspace-autoscale.credential>
     <test.jclouds.keystone.credential-type>passwordCredentials</test.jclouds.keystone.credential-type>
-    <jclouds.osgi.export>org.jclouds.rackspace.autoscale.us*;version="${project.version}"</jclouds.osgi.export>
-    <jclouds.osgi.import>org.jclouds*;version="${project.version}",*</jclouds.osgi.import>
   </properties>
 
   <repositories>
