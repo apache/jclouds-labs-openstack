@@ -22,8 +22,8 @@ import org.jclouds.openstack.poppy.v1.PoppyApi;
 import org.jclouds.openstack.poppy.v1.internal.BasePoppyApiMockTest;
 import org.testng.annotations.Test;
 
-import com.squareup.okhttp.mockwebserver.MockResponse;
-import com.squareup.okhttp.mockwebserver.MockWebServer;
+import okhttp3.mockwebserver.MockResponse;
+import okhttp3.mockwebserver.MockWebServer;
 
 /**
  * Tests annotation parsing of {@code PoppyApi}
@@ -37,7 +37,7 @@ public class PoppyApiMockTest extends BasePoppyApiMockTest {
       server.enqueue(addCommonHeaders(new MockResponse().setResponseCode(204)));
 
       try {
-         PoppyApi poppyApi = api(server.getUrl("/").toString(), "openstack-poppy", overrides);
+         PoppyApi poppyApi = api(server.url("/").toString(), "openstack-poppy", overrides);
          boolean online = poppyApi.ping();
 
          assertThat(server.getRequestCount()).isEqualTo(2);
@@ -58,7 +58,7 @@ public class PoppyApiMockTest extends BasePoppyApiMockTest {
       server.enqueue(addCommonHeaders(new MockResponse().setResponseCode(500)));
 
       try {
-         PoppyApi poppyApi = api(server.getUrl("/").toString(), "openstack-poppy", overrides);
+         PoppyApi poppyApi = api(server.url("/").toString(), "openstack-poppy", overrides);
          boolean online = poppyApi.ping();
 
          assertThat(server.getRequestCount()).isEqualTo(3);

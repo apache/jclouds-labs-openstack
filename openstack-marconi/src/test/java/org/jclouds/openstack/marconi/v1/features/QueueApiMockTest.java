@@ -18,9 +18,9 @@ package org.jclouds.openstack.marconi.v1.features;
 
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Iterables;
-import com.squareup.okhttp.mockwebserver.MockResponse;
-import com.squareup.okhttp.mockwebserver.MockWebServer;
-import com.squareup.okhttp.mockwebserver.RecordedRequest;
+import okhttp3.mockwebserver.MockResponse;
+import okhttp3.mockwebserver.MockWebServer;
+import okhttp3.mockwebserver.RecordedRequest;
 
 import org.jclouds.openstack.marconi.v1.MarconiApi;
 import org.jclouds.openstack.marconi.v1.domain.Queue;
@@ -50,7 +50,7 @@ public class QueueApiMockTest extends BaseOpenStackMockTest<MarconiApi> {
       server.enqueue(new MockResponse().setResponseCode(204));
 
       try {
-         MarconiApi api = api(server.getUrl("/").toString(), "openstack-marconi");
+         MarconiApi api = api(server.url("/").toString(), "openstack-marconi");
          QueueApi queueApi = api.getQueueApi("DFW", CLIENT_ID);
          queueApi.create("jclouds-test");
 
@@ -69,7 +69,7 @@ public class QueueApiMockTest extends BaseOpenStackMockTest<MarconiApi> {
       server.enqueue(new MockResponse().setResponseCode(204));
 
       try {
-         MarconiApi api = api(server.getUrl("/").toString(), "openstack-marconi");
+         MarconiApi api = api(server.url("/").toString(), "openstack-marconi");
          QueueApi queueApi = api.getQueueApi("DFW", CLIENT_ID);
          boolean success = queueApi.delete("jclouds-test");
 
@@ -90,7 +90,7 @@ public class QueueApiMockTest extends BaseOpenStackMockTest<MarconiApi> {
       server.enqueue(new MockResponse().setResponseCode(204));
 
       try {
-         MarconiApi api = api(server.getUrl("/").toString(), "openstack-marconi");
+         MarconiApi api = api(server.url("/").toString(), "openstack-marconi");
          QueueApi queueApi = api.getQueueApi("DFW", CLIENT_ID);
          boolean success = queueApi.exists("jclouds-test");
 
@@ -111,7 +111,7 @@ public class QueueApiMockTest extends BaseOpenStackMockTest<MarconiApi> {
       server.enqueue(new MockResponse().setResponseCode(204));
 
       try {
-         MarconiApi api = api(server.getUrl("/").toString(), "openstack-marconi");
+         MarconiApi api = api(server.url("/").toString(), "openstack-marconi");
          QueueApi queueApi = api.getQueueApi("DFW", CLIENT_ID);
 
          List<Queue> queues = queueApi.list(false).concat().toList();
@@ -134,7 +134,7 @@ public class QueueApiMockTest extends BaseOpenStackMockTest<MarconiApi> {
       server.enqueue(new MockResponse().setResponseCode(204));
 
       try {
-         MarconiApi api = api(server.getUrl("/").toString(), "openstack-marconi");
+         MarconiApi api = api(server.url("/").toString(), "openstack-marconi");
          QueueApi queueApi = api.getQueueApi("DFW", CLIENT_ID);
 
          List<Queue> queues = queueApi.list(false).concat().toList();
@@ -161,7 +161,7 @@ public class QueueApiMockTest extends BaseOpenStackMockTest<MarconiApi> {
       server.enqueue(new MockResponse().setResponseCode(204));
 
       try {
-         MarconiApi api = api(server.getUrl("/").toString(), "openstack-marconi");
+         MarconiApi api = api(server.url("/").toString(), "openstack-marconi");
          QueueApi queueApi = api.getQueueApi("DFW", CLIENT_ID);
 
          List<Queue> queues = queueApi.list(false).concat().toList();
@@ -192,7 +192,7 @@ public class QueueApiMockTest extends BaseOpenStackMockTest<MarconiApi> {
       server.enqueue(new MockResponse().setResponseCode(204));
 
       try {
-         MarconiApi api = api(server.getUrl("/").toString(), "openstack-marconi");
+         MarconiApi api = api(server.url("/").toString(), "openstack-marconi");
          QueueApi queueApi = api.getQueueApi("DFW", CLIENT_ID);
 
          Queues queues = queueApi.list(limit(6));
@@ -225,7 +225,7 @@ public class QueueApiMockTest extends BaseOpenStackMockTest<MarconiApi> {
       server.enqueue(new MockResponse().setResponseCode(204));
 
       try {
-         MarconiApi api = api(server.getUrl("/").toString(), "openstack-marconi");
+         MarconiApi api = api(server.url("/").toString(), "openstack-marconi");
          QueueApi queueApi = api.getQueueApi("DFW", CLIENT_ID);
          Map<String, String> metadata = ImmutableMap.of("key1", "value1");
          queueApi.setMetadata("jclouds-test", metadata);
@@ -247,7 +247,7 @@ public class QueueApiMockTest extends BaseOpenStackMockTest<MarconiApi> {
       server.enqueue(new MockResponse().setResponseCode(200).setBody("{\"key1\":\"value1\"}"));
 
       try {
-         MarconiApi api = api(server.getUrl("/").toString(), "openstack-marconi");
+         MarconiApi api = api(server.url("/").toString(), "openstack-marconi");
          QueueApi queueApi = api.getQueueApi("DFW", CLIENT_ID);
          Map<String, String> metadata = queueApi.getMetadata("jclouds-test");
 
@@ -268,7 +268,7 @@ public class QueueApiMockTest extends BaseOpenStackMockTest<MarconiApi> {
       server.enqueue(new MockResponse().setResponseCode(200).setBody("{\"messages\":{\"claimed\":0,\"total\":0,\"free\":0}}"));
 
       try {
-         MarconiApi api = api(server.getUrl("/").toString(), "openstack-marconi");
+         MarconiApi api = api(server.url("/").toString(), "openstack-marconi");
          QueueApi queueApi = api.getQueueApi("DFW", CLIENT_ID);
          QueueStats stats = queueApi.getStats("jclouds-test");
 
@@ -293,7 +293,7 @@ public class QueueApiMockTest extends BaseOpenStackMockTest<MarconiApi> {
       server.enqueue(new MockResponse().setResponseCode(200).setBody("{\"messages\": {\"claimed\": 0, \"oldest\": {\"age\": 0, \"href\": \"/v1/queues/jclouds-test/messages/526558b3f4919b655feba3a7\", \"created\": \"2013-10-21T16:39:15Z\"}, \"total\": 4, \"newest\": {\"age\": 0, \"href\": \"/v1/queues/jclouds-test/messages/526558b33ac24e663fc545e7\", \"created\": \"2013-10-21T16:39:15Z\"}, \"free\": 4}}"));
 
       try {
-         MarconiApi api = api(server.getUrl("/").toString(), "openstack-marconi");
+         MarconiApi api = api(server.url("/").toString(), "openstack-marconi");
          QueueApi queueApi = api.getQueueApi("DFW", CLIENT_ID);
          QueueStats stats = queueApi.getStats("jclouds-test");
 

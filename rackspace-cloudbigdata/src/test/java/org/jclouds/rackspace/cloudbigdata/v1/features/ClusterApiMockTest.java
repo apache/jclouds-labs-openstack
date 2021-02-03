@@ -34,8 +34,8 @@ import org.jclouds.rackspace.cloudbigdata.v1.internal.BaseCloudBigDataApiMockTes
 import org.testng.annotations.Test;
 
 import com.google.common.collect.FluentIterable;
-import com.squareup.okhttp.mockwebserver.MockResponse;
-import com.squareup.okhttp.mockwebserver.MockWebServer;
+import okhttp3.mockwebserver.MockResponse;
+import okhttp3.mockwebserver.MockWebServer;
 
 /**
  * Tests ProfileApi Guice wiring and parsing
@@ -49,7 +49,7 @@ public class ClusterApiMockTest extends BaseCloudBigDataApiMockTest {
       server.enqueue(addCommonHeaders(new MockResponse().setResponseCode(201).setBody(stringFromResource("/cluster_create_response.json"))));
 
       try {
-         CloudBigDataApi cbdApi = api(server.getUrl("/").toString(), "rackspace-cloudbigdata", overrides);
+         CloudBigDataApi cbdApi = api(server.url("/").toString(), "rackspace-cloudbigdata", overrides);
          ClusterApi api = cbdApi.getClusterApi("ORD");
 
          CreateCluster createCluster = CreateCluster.builder()
@@ -95,7 +95,7 @@ public class ClusterApiMockTest extends BaseCloudBigDataApiMockTest {
       server.enqueue(addCommonHeaders(new MockResponse().setResponseCode(404).setBody(stringFromResource("/cluster_create_response.json"))));
 
       try {
-         CloudBigDataApi cbdApi = api(server.getUrl("/").toString(), "rackspace-cloudbigdata", overrides);
+         CloudBigDataApi cbdApi = api(server.url("/").toString(), "rackspace-cloudbigdata", overrides);
          ClusterApi api = cbdApi.getClusterApi("ORD");
 
          CreateCluster createCluster = CreateCluster.builder()
@@ -129,7 +129,7 @@ public class ClusterApiMockTest extends BaseCloudBigDataApiMockTest {
       server.enqueue(addCommonHeaders(new MockResponse().setResponseCode(201).setBody(stringFromResource("/cluster_get_response.json"))));
 
       try {
-         CloudBigDataApi cbdApi = api(server.getUrl("/").toString(), "rackspace-cloudbigdata", overrides);
+         CloudBigDataApi cbdApi = api(server.url("/").toString(), "rackspace-cloudbigdata", overrides);
          ClusterApi api = cbdApi.getClusterApi("ORD");
 
          Cluster cluster = api.get("5");
@@ -167,7 +167,7 @@ public class ClusterApiMockTest extends BaseCloudBigDataApiMockTest {
       server.enqueue(addCommonHeaders(new MockResponse().setResponseCode(404).setBody(stringFromResource("/cluster_get_response.json"))));
 
       try {
-         CloudBigDataApi cbdApi = api(server.getUrl("/").toString(), "rackspace-cloudbigdata", overrides);
+         CloudBigDataApi cbdApi = api(server.url("/").toString(), "rackspace-cloudbigdata", overrides);
          ClusterApi api = cbdApi.getClusterApi("ORD");
 
          Cluster cluster = api.get("5");
@@ -193,7 +193,7 @@ public class ClusterApiMockTest extends BaseCloudBigDataApiMockTest {
       server.enqueue(addCommonHeaders(new MockResponse().setResponseCode(201).setBody(stringFromResource("/cluster_list_response.json"))));
 
       try {
-         CloudBigDataApi cbdApi = api(server.getUrl("/").toString(), "rackspace-cloudbigdata", overrides);
+         CloudBigDataApi cbdApi = api(server.url("/").toString(), "rackspace-cloudbigdata", overrides);
          ClusterApi api = cbdApi.getClusterApi("ORD");
 
          FluentIterable<Cluster> clusters = api.list();
@@ -233,7 +233,7 @@ public class ClusterApiMockTest extends BaseCloudBigDataApiMockTest {
       server.enqueue(addCommonHeaders(new MockResponse().setResponseCode(404).setBody(stringFromResource("/cluster_list_response.json"))));
 
       try {
-         CloudBigDataApi cbdApi = api(server.getUrl("/").toString(), "rackspace-cloudbigdata", overrides);
+         CloudBigDataApi cbdApi = api(server.url("/").toString(), "rackspace-cloudbigdata", overrides);
          ClusterApi api = cbdApi.getClusterApi("ORD");
 
          FluentIterable<Cluster> clusters = api.list();
@@ -260,7 +260,7 @@ public class ClusterApiMockTest extends BaseCloudBigDataApiMockTest {
       server.enqueue(addCommonHeaders(new MockResponse().setResponseCode(201).setBody(stringFromResource("/cluster_delete_response.json"))));
 
       try {
-         CloudBigDataApi cbdApi = api(server.getUrl("/").toString(), "rackspace-cloudbigdata", overrides);
+         CloudBigDataApi cbdApi = api(server.url("/").toString(), "rackspace-cloudbigdata", overrides);
          ClusterApi api = cbdApi.getClusterApi("ORD");
 
          Cluster cluster = api.delete("5");
@@ -298,7 +298,7 @@ public class ClusterApiMockTest extends BaseCloudBigDataApiMockTest {
       server.enqueue(addCommonHeaders(new MockResponse().setResponseCode(404).setBody(stringFromResource("/cluster_delete_response.json"))));
 
       try {
-         CloudBigDataApi cbdApi = api(server.getUrl("/").toString(), "rackspace-cloudbigdata", overrides);
+         CloudBigDataApi cbdApi = api(server.url("/").toString(), "rackspace-cloudbigdata", overrides);
          ClusterApi api = cbdApi.getClusterApi("ORD");
 
          Cluster cluster = api.delete("5");
@@ -324,7 +324,7 @@ public class ClusterApiMockTest extends BaseCloudBigDataApiMockTest {
       server.enqueue(addCommonHeaders(new MockResponse().setResponseCode(201).setBody(stringFromResource("/cluster_resize_response.json"))));
 
       try {
-         CloudBigDataApi cbdApi = api(server.getUrl("/").toString(), "rackspace-cloudbigdata", overrides);
+         CloudBigDataApi cbdApi = api(server.url("/").toString(), "rackspace-cloudbigdata", overrides);
          ClusterApi api = cbdApi.getClusterApi("ORD");
 
          Cluster cluster = api.resize("5", 10);
@@ -362,7 +362,7 @@ public class ClusterApiMockTest extends BaseCloudBigDataApiMockTest {
       server.enqueue(addCommonHeaders(new MockResponse().setResponseCode(404).setBody(stringFromResource("/cluster_resize_response.json"))));
 
       try {
-         CloudBigDataApi cbdApi = api(server.getUrl("/").toString(), "rackspace-cloudbigdata", overrides);
+         CloudBigDataApi cbdApi = api(server.url("/").toString(), "rackspace-cloudbigdata", overrides);
          ClusterApi api = cbdApi.getClusterApi("ORD");
 
          Cluster cluster = api.resize("5", 10);

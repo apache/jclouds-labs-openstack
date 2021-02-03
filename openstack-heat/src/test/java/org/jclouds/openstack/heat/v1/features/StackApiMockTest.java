@@ -33,8 +33,8 @@ import org.jclouds.openstack.heat.v1.options.ListStackOptions;
 import org.jclouds.openstack.heat.v1.options.UpdateStack;
 import org.testng.annotations.Test;
 
-import com.squareup.okhttp.mockwebserver.MockResponse;
-import com.squareup.okhttp.mockwebserver.MockWebServer;
+import okhttp3.mockwebserver.MockResponse;
+import okhttp3.mockwebserver.MockWebServer;
 
 /**
  * Tests annotation parsing of {@code StackApi}
@@ -55,7 +55,7 @@ public class StackApiMockTest extends BaseHeatApiMockTest {
             new MockResponse().setResponseCode(200).setBody(stringFromResource("/stack_get_response.json"))));
 
       try {
-         HeatApi heatApi = api(server.getUrl("/").toString(), "openstack-heat", overrides);
+         HeatApi heatApi = api(server.url("/").toString(), "openstack-heat", overrides);
          StackApi api = heatApi.getStackApi("RegionOne");
 
          Stack stack = api.get("simple_stack", "3095aefc-09fb-4bc7-b1f0-f21a304e864c");
@@ -78,7 +78,7 @@ public class StackApiMockTest extends BaseHeatApiMockTest {
             new MockResponse().setResponseCode(200).setBody(stringFromResource("/stack_get_response.json"))));
 
       try {
-         HeatApi heatApi = api(server.getUrl("/").toString(), "openstack-heat", overrides);
+         HeatApi heatApi = api(server.url("/").toString(), "openstack-heat", overrides);
          StackApi api = heatApi.getStackApi("RegionOne");
 
          Stack stack = api.get("3095aefc-09fb-4bc7-b1f0-f21a304e864c");
@@ -101,7 +101,7 @@ public class StackApiMockTest extends BaseHeatApiMockTest {
             new MockResponse().setResponseCode(200).setBody(stringFromResource("/stack_list_response.json"))));
 
       try {
-         HeatApi heatApi = api(server.getUrl("/").toString(), "openstack-heat", overrides);
+         HeatApi heatApi = api(server.url("/").toString(), "openstack-heat", overrides);
          StackApi api = heatApi.getStackApi("RegionOne");
 
          List<Stack> stacks = api.list();
@@ -131,7 +131,7 @@ public class StackApiMockTest extends BaseHeatApiMockTest {
             new MockResponse().setResponseCode(200).setBody(stringFromResource("/stack_list_response.json"))));
 
       try {
-         HeatApi heatApi = api(server.getUrl("/").toString(), "openstack-heat", overrides);
+         HeatApi heatApi = api(server.url("/").toString(), "openstack-heat", overrides);
          StackApi api = heatApi.getStackApi("RegionOne");
 
          ListStackOptions options = ListStackOptions.Builder.name("simple_stack").showNested(true).globalTenant(true);
@@ -163,7 +163,7 @@ public class StackApiMockTest extends BaseHeatApiMockTest {
             new MockResponse().setResponseCode(200).setBody(stringFromResource("/stack_resources_list_response.json"))));
 
       try {
-         HeatApi heatApi = api(server.getUrl("/").toString(), "openstack-heat", overrides);
+         HeatApi heatApi = api(server.url("/").toString(), "openstack-heat", overrides);
          StackApi api = heatApi.getStackApi("RegionOne");
 
          List<StackResource> stackResources = api.listStackResources(TEST_STACK_NAME, TEST_STACK_ID);
@@ -193,7 +193,7 @@ public class StackApiMockTest extends BaseHeatApiMockTest {
             new MockResponse().setResponseCode(200).setBody(stringFromResource("/stack_resources_get_response.json"))));
 
       try {
-         HeatApi heatApi = api(server.getUrl("/").toString(), "openstack-heat", overrides);
+         HeatApi heatApi = api(server.url("/").toString(), "openstack-heat", overrides);
          StackApi api = heatApi.getStackApi("RegionOne");
 
          StackResource stackResource = api.getStackResource(TEST_STACK_NAME, TEST_STACK_ID, TEST_STACK_RESOURCE_NAME);
@@ -227,7 +227,7 @@ public class StackApiMockTest extends BaseHeatApiMockTest {
       server.enqueue(addCommonHeaders(new MockResponse().setResponseCode(200).setBody(stringFromResource("/create_stack.json"))));
 
       try {
-         HeatApi heatApi = api(server.getUrl("/").toString(), "openstack-heat", overrides);
+         HeatApi heatApi = api(server.url("/").toString(), "openstack-heat", overrides);
          StackApi api = heatApi.getStackApi("RegionOne");
 
          CreateStack createStack = CreateStack.builder().name(TEST_STACK_NAME).templateUrl("http://10.5.5.121/Installs/cPaaS/YAML/simple_stack.yaml").build();
@@ -257,7 +257,7 @@ public class StackApiMockTest extends BaseHeatApiMockTest {
       server.enqueue(addCommonHeaders(new MockResponse().setResponseCode(200)));
 
       try {
-         HeatApi heatApi = api(server.getUrl("/").toString(), "openstack-heat", overrides);
+         HeatApi heatApi = api(server.url("/").toString(), "openstack-heat", overrides);
          StackApi api = heatApi.getStackApi("RegionOne");
 
          boolean result = api.delete(TEST_STACK_NAME, TEST_STACK_ID);
@@ -284,7 +284,7 @@ public class StackApiMockTest extends BaseHeatApiMockTest {
       server.enqueue(addCommonHeaders(new MockResponse().setResponseCode(202)));
 
       try {
-         HeatApi heatApi = api(server.getUrl("/").toString(), "openstack-heat", overrides);
+         HeatApi heatApi = api(server.url("/").toString(), "openstack-heat", overrides);
          StackApi api = heatApi.getStackApi("RegionOne");
 
          UpdateStack updateOptions = UpdateStack.builder().templateUrl("http://10.5.5.121/Installs/cPaaS/YAML/simple_stack.yaml").build();
@@ -314,7 +314,7 @@ public class StackApiMockTest extends BaseHeatApiMockTest {
       server.enqueue(addCommonHeaders(new MockResponse().setResponseCode(200).setBody(stringFromResource("/resources_metadata.json"))));
 
       try {
-         HeatApi heatApi = api(server.getUrl("/").toString(), "openstack-heat", overrides);
+         HeatApi heatApi = api(server.url("/").toString(), "openstack-heat", overrides);
          StackApi api = heatApi.getStackApi("RegionOne");
 
          Map<String, Object> metadata = api.getStackResourceMetadata(TEST_STACK_NAME, TEST_STACK_ID, RESOURCES_TEST_NAME);

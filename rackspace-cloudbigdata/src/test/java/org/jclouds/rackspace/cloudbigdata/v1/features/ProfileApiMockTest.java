@@ -32,8 +32,8 @@ import org.jclouds.rackspace.cloudbigdata.v1.internal.BaseCloudBigDataApiMockTes
 import org.testng.annotations.Test;
 
 import com.google.common.collect.ImmutableList;
-import com.squareup.okhttp.mockwebserver.MockResponse;
-import com.squareup.okhttp.mockwebserver.MockWebServer;
+import okhttp3.mockwebserver.MockResponse;
+import okhttp3.mockwebserver.MockWebServer;
 
 /**
  * Tests ProfileApi Guice wiring and parsing
@@ -47,7 +47,7 @@ public class ProfileApiMockTest extends BaseCloudBigDataApiMockTest {
       server.enqueue(addCommonHeaders(new MockResponse().setResponseCode(201).setBody(stringFromResource("/profile_create_response.json"))));
 
       try {
-         CloudBigDataApi cbdApi = api(server.getUrl("/").toString(), "rackspace-cloudbigdata", overrides);
+         CloudBigDataApi cbdApi = api(server.url("/").toString(), "rackspace-cloudbigdata", overrides);
          ProfileApi api = cbdApi.getProfileApi("ORD");
 
          CreateProfile createProfile = CreateProfile.builder()
@@ -96,7 +96,7 @@ public class ProfileApiMockTest extends BaseCloudBigDataApiMockTest {
       server.enqueue(addCommonHeaders(new MockResponse().setResponseCode(404).setBody(stringFromResource("/profile_create_response.json"))));
 
       try {
-         CloudBigDataApi cbdApi = api(server.getUrl("/").toString(), "rackspace-cloudbigdata", overrides);
+         CloudBigDataApi cbdApi = api(server.url("/").toString(), "rackspace-cloudbigdata", overrides);
          ProfileApi api = cbdApi.getProfileApi("ORD");
 
          CreateProfile createProfile = CreateProfile.builder()
@@ -137,7 +137,7 @@ public class ProfileApiMockTest extends BaseCloudBigDataApiMockTest {
       server.enqueue(addCommonHeaders(new MockResponse().setResponseCode(201).setBody(stringFromResource("/profile_get_response.json"))));
 
       try {
-         CloudBigDataApi cbdApi = api(server.getUrl("/").toString(), "rackspace-cloudbigdata", overrides);
+         CloudBigDataApi cbdApi = api(server.url("/").toString(), "rackspace-cloudbigdata", overrides);
          ProfileApi api = cbdApi.getProfileApi("ORD");
          Profile profile = api.get();
 
@@ -170,7 +170,7 @@ public class ProfileApiMockTest extends BaseCloudBigDataApiMockTest {
       server.enqueue(addCommonHeaders(new MockResponse().setResponseCode(404).setBody(stringFromResource("/profile_get_response.json"))));
 
       try {
-         CloudBigDataApi cbdApi = api(server.getUrl("/").toString(), "rackspace-cloudbigdata", overrides);
+         CloudBigDataApi cbdApi = api(server.url("/").toString(), "rackspace-cloudbigdata", overrides);
          ProfileApi api = cbdApi.getProfileApi("ORD");
          Profile profile = api.get();
 

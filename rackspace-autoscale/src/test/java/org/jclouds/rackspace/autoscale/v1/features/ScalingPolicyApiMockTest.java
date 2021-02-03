@@ -36,8 +36,8 @@ import org.testng.annotations.Test;
 
 import com.google.common.collect.FluentIterable;
 import com.google.common.collect.Lists;
-import com.squareup.okhttp.mockwebserver.MockResponse;
-import com.squareup.okhttp.mockwebserver.MockWebServer;
+import okhttp3.mockwebserver.MockResponse;
+import okhttp3.mockwebserver.MockWebServer;
 
 /**
  * Tests Scaling Policy Api Guice wiring and parsing
@@ -51,7 +51,7 @@ public class ScalingPolicyApiMockTest extends BaseAutoscaleApiMockTest {
       server.enqueue(addCommonHeaders(new MockResponse().setResponseCode(201).setBody(stringFromResource("/autoscale_policy_create_response.json"))));
 
       try {
-         AutoscaleApi autoscaleApi = api(server.getUrl("/").toString(), "rackspace-autoscale", overrides);
+         AutoscaleApi autoscaleApi = api(server.url("/").toString(), "rackspace-autoscale", overrides);
          PolicyApi api = autoscaleApi.getPolicyApi("DFW", "groupId1");
 
          List<CreateScalingPolicy> scalingPolicies = Lists.newArrayList();
@@ -94,7 +94,7 @@ public class ScalingPolicyApiMockTest extends BaseAutoscaleApiMockTest {
       server.enqueue(addCommonHeaders(new MockResponse().setResponseCode(404).setBody(stringFromResource("/autoscale_policy_create_response.json"))));
 
       try {
-         AutoscaleApi autoscaleApi = api(server.getUrl("/").toString(), "rackspace-autoscale", overrides);
+         AutoscaleApi autoscaleApi = api(server.url("/").toString(), "rackspace-autoscale", overrides);
          PolicyApi api = autoscaleApi.getPolicyApi("DFW", "groupId1");
 
          List<CreateScalingPolicy> scalingPolicies = Lists.newArrayList();
@@ -131,7 +131,7 @@ public class ScalingPolicyApiMockTest extends BaseAutoscaleApiMockTest {
       server.enqueue(addCommonHeaders(new MockResponse().setResponseCode(201).setBody(stringFromResource("/autoscale_policy_schedule_cron_create_response.json"))));
 
       try {
-         AutoscaleApi autoscaleApi = api(server.getUrl("/").toString(), "rackspace-autoscale", overrides);
+         AutoscaleApi autoscaleApi = api(server.url("/").toString(), "rackspace-autoscale", overrides);
          PolicyApi api = autoscaleApi.getPolicyApi("DFW", "groupId1");
 
          List<CreateScalingPolicy> scalingPolicies = Lists.newArrayList();
@@ -178,7 +178,7 @@ public class ScalingPolicyApiMockTest extends BaseAutoscaleApiMockTest {
       server.enqueue(addCommonHeaders(new MockResponse().setResponseCode(201).setBody(stringFromResource("/autoscale_policy_schedule_at_create_response.json"))));
 
       try {
-         AutoscaleApi autoscaleApi = api(server.getUrl("/").toString(), "rackspace-autoscale", overrides);
+         AutoscaleApi autoscaleApi = api(server.url("/").toString(), "rackspace-autoscale", overrides);
          PolicyApi api = autoscaleApi.getPolicyApi("DFW", "groupId1");
 
          List<CreateScalingPolicy> scalingPolicies = Lists.newArrayList();
@@ -225,7 +225,7 @@ public class ScalingPolicyApiMockTest extends BaseAutoscaleApiMockTest {
       server.enqueue(addCommonHeaders(new MockResponse().setResponseCode(201).setBody(stringFromResource("/autoscale_policy_list_response.json"))));
 
       try {
-         AutoscaleApi autoscaleApi = api(server.getUrl("/").toString(), "rackspace-autoscale", overrides);
+         AutoscaleApi autoscaleApi = api(server.url("/").toString(), "rackspace-autoscale", overrides);
          PolicyApi api = autoscaleApi.getPolicyApi("DFW", "groupId1");
 
          FluentIterable<ScalingPolicy> scalingPolicyResponse = api.list();
@@ -257,7 +257,7 @@ public class ScalingPolicyApiMockTest extends BaseAutoscaleApiMockTest {
       server.enqueue(addCommonHeaders(new MockResponse().setResponseCode(404).setBody(stringFromResource("/autoscale_policy_list_response.json"))));
 
       try {
-         AutoscaleApi autoscaleApi = api(server.getUrl("/").toString(), "rackspace-autoscale", overrides);
+         AutoscaleApi autoscaleApi = api(server.url("/").toString(), "rackspace-autoscale", overrides);
          PolicyApi api = autoscaleApi.getPolicyApi("DFW", "groupId1");
 
          FluentIterable<ScalingPolicy> scalingPolicyResponse = api.list();
@@ -283,7 +283,7 @@ public class ScalingPolicyApiMockTest extends BaseAutoscaleApiMockTest {
       server.enqueue(addCommonHeaders(new MockResponse().setResponseCode(201).setBody(stringFromResource("/autoscale_policy_get_response.json"))));
 
       try {
-         AutoscaleApi autoscaleApi = api(server.getUrl("/").toString(), "rackspace-autoscale", overrides);
+         AutoscaleApi autoscaleApi = api(server.url("/").toString(), "rackspace-autoscale", overrides);
          PolicyApi api = autoscaleApi.getPolicyApi("DFW", "groupId1");
 
          ScalingPolicy scalingPolicyResponse = api.get("policyId");
@@ -314,7 +314,7 @@ public class ScalingPolicyApiMockTest extends BaseAutoscaleApiMockTest {
       server.enqueue(addCommonHeaders(new MockResponse().setResponseCode(404).setBody(stringFromResource("/autoscale_policy_get_response.json"))));
 
       try {
-         AutoscaleApi autoscaleApi = api(server.getUrl("/").toString(), "rackspace-autoscale", overrides);
+         AutoscaleApi autoscaleApi = api(server.url("/").toString(), "rackspace-autoscale", overrides);
          PolicyApi api = autoscaleApi.getPolicyApi("DFW", "groupId1");
 
          ScalingPolicy scalingPolicyResponse = api.get("policyId");
@@ -340,7 +340,7 @@ public class ScalingPolicyApiMockTest extends BaseAutoscaleApiMockTest {
       server.enqueue(addCommonHeaders(new MockResponse().setResponseCode(201)));
 
       try {
-         AutoscaleApi autoscaleApi = api(server.getUrl("/").toString(), "rackspace-autoscale", overrides);
+         AutoscaleApi autoscaleApi = api(server.url("/").toString(), "rackspace-autoscale", overrides);
          PolicyApi api = autoscaleApi.getPolicyApi("DFW", "groupId1");
 
          CreateScalingPolicy scalingPolicy = CreateScalingPolicy.builder()
@@ -374,7 +374,7 @@ public class ScalingPolicyApiMockTest extends BaseAutoscaleApiMockTest {
       server.enqueue(addCommonHeaders(new MockResponse().setResponseCode(404)));
 
       try {
-         AutoscaleApi autoscaleApi = api(server.getUrl("/").toString(), "rackspace-autoscale", overrides);
+         AutoscaleApi autoscaleApi = api(server.url("/").toString(), "rackspace-autoscale", overrides);
          PolicyApi api = autoscaleApi.getPolicyApi("DFW", "groupId1");
 
          CreateScalingPolicy scalingPolicy = CreateScalingPolicy.builder()
@@ -408,7 +408,7 @@ public class ScalingPolicyApiMockTest extends BaseAutoscaleApiMockTest {
       server.enqueue(addCommonHeaders(new MockResponse().setResponseCode(201)));
 
       try {
-         AutoscaleApi autoscaleApi = api(server.getUrl("/").toString(), "rackspace-autoscale", overrides);
+         AutoscaleApi autoscaleApi = api(server.url("/").toString(), "rackspace-autoscale", overrides);
          PolicyApi api = autoscaleApi.getPolicyApi("DFW", "groupId1");
 
          boolean result = api.delete("policyId");
@@ -434,7 +434,7 @@ public class ScalingPolicyApiMockTest extends BaseAutoscaleApiMockTest {
       server.enqueue(addCommonHeaders(new MockResponse().setResponseCode(404)));
 
       try {
-         AutoscaleApi autoscaleApi = api(server.getUrl("/").toString(), "rackspace-autoscale", overrides);
+         AutoscaleApi autoscaleApi = api(server.url("/").toString(), "rackspace-autoscale", overrides);
          PolicyApi api = autoscaleApi.getPolicyApi("DFW", "groupId1");
 
          boolean result = api.delete("policyId");
@@ -460,7 +460,7 @@ public class ScalingPolicyApiMockTest extends BaseAutoscaleApiMockTest {
       server.enqueue(addCommonHeaders(new MockResponse().setResponseCode(201)));
 
       try {
-         AutoscaleApi autoscaleApi = api(server.getUrl("/").toString(), "rackspace-autoscale", overrides);
+         AutoscaleApi autoscaleApi = api(server.url("/").toString(), "rackspace-autoscale", overrides);
          PolicyApi api = autoscaleApi.getPolicyApi("DFW", "groupId1");
 
          boolean result = api.execute("policyId");
@@ -486,7 +486,7 @@ public class ScalingPolicyApiMockTest extends BaseAutoscaleApiMockTest {
       server.enqueue(addCommonHeaders(new MockResponse().setResponseCode(404)));
 
       try {
-         AutoscaleApi autoscaleApi = api(server.getUrl("/").toString(), "rackspace-autoscale", overrides);
+         AutoscaleApi autoscaleApi = api(server.url("/").toString(), "rackspace-autoscale", overrides);
          PolicyApi api = autoscaleApi.getPolicyApi("DFW", "groupId1");
 
          boolean result = api.execute("policyId");

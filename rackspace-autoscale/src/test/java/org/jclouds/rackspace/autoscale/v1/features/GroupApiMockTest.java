@@ -44,8 +44,8 @@ import com.google.common.collect.FluentIterable;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Lists;
-import com.squareup.okhttp.mockwebserver.MockResponse;
-import com.squareup.okhttp.mockwebserver.MockWebServer;
+import okhttp3.mockwebserver.MockResponse;
+import okhttp3.mockwebserver.MockWebServer;
 
 /**
  * Tests GroupApi Guice wiring and parsing
@@ -59,7 +59,7 @@ public class GroupApiMockTest extends BaseAutoscaleApiMockTest {
       server.enqueue(addCommonHeaders(new MockResponse().setResponseCode(201).setBody(stringFromResource("/autoscale_groups_create_response.json"))));
 
       try {
-         AutoscaleApi autoscaleApi = api(server.getUrl("/").toString(), "rackspace-autoscale", overrides);
+         AutoscaleApi autoscaleApi = api(server.url("/").toString(), "rackspace-autoscale", overrides);
          GroupApi api = autoscaleApi.getGroupApi("DFW");
 
          GroupConfiguration groupConfiguration = GroupConfiguration.builder()
@@ -156,7 +156,7 @@ public class GroupApiMockTest extends BaseAutoscaleApiMockTest {
       server.enqueue(addCommonHeaders(new MockResponse().setResponseCode(404).setBody(stringFromResource("/autoscale_groups_create_response.json"))));
 
       try {
-         AutoscaleApi autoscaleApi = api(server.getUrl("/").toString(), "rackspace-autoscale", overrides);
+         AutoscaleApi autoscaleApi = api(server.url("/").toString(), "rackspace-autoscale", overrides);
          GroupApi api = autoscaleApi.getGroupApi("DFW");
 
          GroupConfiguration groupConfiguration = GroupConfiguration.builder()
@@ -210,7 +210,7 @@ public class GroupApiMockTest extends BaseAutoscaleApiMockTest {
       server.enqueue(addCommonHeaders(new MockResponse().setResponseCode(200).setBody(stringFromResource("/autoscale_groups_list_response.json"))));
 
       try {
-         AutoscaleApi autoscaleApi = api(server.getUrl("/").toString(), "rackspace-autoscale", overrides);
+         AutoscaleApi autoscaleApi = api(server.url("/").toString(), "rackspace-autoscale", overrides);
          GroupApi api = autoscaleApi.getGroupApi("DFW");
 
          FluentIterable<GroupState> groupStates = api.listGroupStates();
@@ -247,7 +247,7 @@ public class GroupApiMockTest extends BaseAutoscaleApiMockTest {
       server.enqueue(addCommonHeaders(new MockResponse().setResponseCode(404).setBody(stringFromResource("/autoscale_groups_list_response.json"))));
 
       try {
-         AutoscaleApi autoscaleApi = api(server.getUrl("/").toString(), "rackspace-autoscale", overrides);
+         AutoscaleApi autoscaleApi = api(server.url("/").toString(), "rackspace-autoscale", overrides);
          GroupApi api = autoscaleApi.getGroupApi("DFW");
 
          FluentIterable<GroupState> groupStates = api.listGroupStates();
@@ -273,7 +273,7 @@ public class GroupApiMockTest extends BaseAutoscaleApiMockTest {
       server.enqueue(addCommonHeaders(new MockResponse().setResponseCode(200).setBody(stringFromResource("/autoscale_groups_get_response.json"))));
 
       try {
-         AutoscaleApi autoscaleApi = api(server.getUrl("/").toString(), "rackspace-autoscale", overrides);
+         AutoscaleApi autoscaleApi = api(server.url("/").toString(), "rackspace-autoscale", overrides);
          GroupApi api = autoscaleApi.getGroupApi("DFW");
 
          Group g = api.get("1234567890");
@@ -300,7 +300,7 @@ public class GroupApiMockTest extends BaseAutoscaleApiMockTest {
       server.enqueue(addCommonHeaders(new MockResponse().setResponseCode(404).setBody(stringFromResource("/autoscale_groups_get_response.json"))));
 
       try {
-         AutoscaleApi autoscaleApi = api(server.getUrl("/").toString(), "rackspace-autoscale", overrides);
+         AutoscaleApi autoscaleApi = api(server.url("/").toString(), "rackspace-autoscale", overrides);
          GroupApi api = autoscaleApi.getGroupApi("DFW");
 
          Group g = api.get("1234567890");
@@ -326,7 +326,7 @@ public class GroupApiMockTest extends BaseAutoscaleApiMockTest {
       server.enqueue(addCommonHeaders(new MockResponse().setResponseCode(200)));
 
       try {
-         AutoscaleApi autoscaleApi = api(server.getUrl("/").toString(), "rackspace-autoscale", overrides);
+         AutoscaleApi autoscaleApi = api(server.url("/").toString(), "rackspace-autoscale", overrides);
          GroupApi api = autoscaleApi.getGroupApi("DFW");
 
          boolean success = api.delete("1234567890");
@@ -352,7 +352,7 @@ public class GroupApiMockTest extends BaseAutoscaleApiMockTest {
       server.enqueue(addCommonHeaders(new MockResponse().setResponseCode(404)));
 
       try {
-         AutoscaleApi autoscaleApi = api(server.getUrl("/").toString(), "rackspace-autoscale", overrides);
+         AutoscaleApi autoscaleApi = api(server.url("/").toString(), "rackspace-autoscale", overrides);
          GroupApi api = autoscaleApi.getGroupApi("DFW");
 
          boolean success = api.delete("1234567890");
@@ -378,7 +378,7 @@ public class GroupApiMockTest extends BaseAutoscaleApiMockTest {
       server.enqueue(addCommonHeaders(new MockResponse().setResponseCode(200).setBody(stringFromResource("/autoscale_groups_state_response.json"))));
 
       try {
-         AutoscaleApi autoscaleApi = api(server.getUrl("/").toString(), "rackspace-autoscale", overrides);
+         AutoscaleApi autoscaleApi = api(server.url("/").toString(), "rackspace-autoscale", overrides);
          GroupApi api = autoscaleApi.getGroupApi("DFW");
 
          GroupState gs = api.getState("1234567890");
@@ -406,7 +406,7 @@ public class GroupApiMockTest extends BaseAutoscaleApiMockTest {
       server.enqueue(addCommonHeaders(new MockResponse().setResponseCode(404).setBody(stringFromResource("/autoscale_groups_state_response.json"))));
 
       try {
-         AutoscaleApi autoscaleApi = api(server.getUrl("/").toString(), "rackspace-autoscale", overrides);
+         AutoscaleApi autoscaleApi = api(server.url("/").toString(), "rackspace-autoscale", overrides);
          GroupApi api = autoscaleApi.getGroupApi("DFW");
 
          GroupState gs = api.getState("1234567890");
@@ -432,7 +432,7 @@ public class GroupApiMockTest extends BaseAutoscaleApiMockTest {
       server.enqueue(addCommonHeaders(new MockResponse().setResponseCode(204)));
 
       try {
-         AutoscaleApi autoscaleApi = api(server.getUrl("/").toString(), "rackspace-autoscale", overrides);
+         AutoscaleApi autoscaleApi = api(server.url("/").toString(), "rackspace-autoscale", overrides);
          GroupApi api = autoscaleApi.getGroupApi("DFW");
 
          boolean success = api.pause("1234567890");
@@ -458,7 +458,7 @@ public class GroupApiMockTest extends BaseAutoscaleApiMockTest {
       server.enqueue(addCommonHeaders(new MockResponse().setResponseCode(404)));
 
       try {
-         AutoscaleApi autoscaleApi = api(server.getUrl("/").toString(), "rackspace-autoscale", overrides);
+         AutoscaleApi autoscaleApi = api(server.url("/").toString(), "rackspace-autoscale", overrides);
          GroupApi api = autoscaleApi.getGroupApi("DFW");
 
          boolean success = api.pause("1234567890");
@@ -484,7 +484,7 @@ public class GroupApiMockTest extends BaseAutoscaleApiMockTest {
       server.enqueue(addCommonHeaders(new MockResponse().setResponseCode(204)));
 
       try {
-         AutoscaleApi autoscaleApi = api(server.getUrl("/").toString(), "rackspace-autoscale", overrides);
+         AutoscaleApi autoscaleApi = api(server.url("/").toString(), "rackspace-autoscale", overrides);
          GroupApi api = autoscaleApi.getGroupApi("DFW");
 
          boolean success = api.resume("1234567890");
@@ -510,7 +510,7 @@ public class GroupApiMockTest extends BaseAutoscaleApiMockTest {
       server.enqueue(addCommonHeaders(new MockResponse().setResponseCode(404)));
 
       try {
-         AutoscaleApi autoscaleApi = api(server.getUrl("/").toString(), "rackspace-autoscale", overrides);
+         AutoscaleApi autoscaleApi = api(server.url("/").toString(), "rackspace-autoscale", overrides);
          GroupApi api = autoscaleApi.getGroupApi("DFW");
 
          boolean success = api.resume("1234567890");
@@ -536,7 +536,7 @@ public class GroupApiMockTest extends BaseAutoscaleApiMockTest {
       server.enqueue(addCommonHeaders(new MockResponse().setResponseCode(200).setBody(stringFromResource("/autoscale_groups_configuration_get_response.json"))));
 
       try {
-         AutoscaleApi autoscaleApi = api(server.getUrl("/").toString(), "rackspace-autoscale", overrides);
+         AutoscaleApi autoscaleApi = api(server.url("/").toString(), "rackspace-autoscale", overrides);
          GroupApi api = autoscaleApi.getGroupApi("DFW");
 
          GroupConfiguration gc = api.getGroupConfiguration("1234567890");
@@ -563,7 +563,7 @@ public class GroupApiMockTest extends BaseAutoscaleApiMockTest {
       server.enqueue(addCommonHeaders(new MockResponse().setResponseCode(404).setBody(stringFromResource("/autoscale_groups_configuration_get_response.json"))));
 
       try {
-         AutoscaleApi autoscaleApi = api(server.getUrl("/").toString(), "rackspace-autoscale", overrides);
+         AutoscaleApi autoscaleApi = api(server.url("/").toString(), "rackspace-autoscale", overrides);
          GroupApi api = autoscaleApi.getGroupApi("DFW");
 
          GroupConfiguration gc = api.getGroupConfiguration("1234567890");
@@ -589,7 +589,7 @@ public class GroupApiMockTest extends BaseAutoscaleApiMockTest {
       server.enqueue(addCommonHeaders(new MockResponse().setResponseCode(200).setBody(stringFromResource("/autoscale_groups_launch_configuration_get_response.json"))));
 
       try {
-         AutoscaleApi autoscaleApi = api(server.getUrl("/").toString(), "rackspace-autoscale", overrides);
+         AutoscaleApi autoscaleApi = api(server.url("/").toString(), "rackspace-autoscale", overrides);
          GroupApi api = autoscaleApi.getGroupApi("DFW");
 
          LaunchConfiguration lc = api.getLaunchConfiguration("1234567890");
@@ -616,7 +616,7 @@ public class GroupApiMockTest extends BaseAutoscaleApiMockTest {
       server.enqueue(addCommonHeaders(new MockResponse().setResponseCode(404).setBody(stringFromResource("/autoscale_groups_launch_configuration_get_response.json"))));
 
       try {
-         AutoscaleApi autoscaleApi = api(server.getUrl("/").toString(), "rackspace-autoscale", overrides);
+         AutoscaleApi autoscaleApi = api(server.url("/").toString(), "rackspace-autoscale", overrides);
          GroupApi api = autoscaleApi.getGroupApi("DFW");
 
          LaunchConfiguration lc = api.getLaunchConfiguration("1234567890");
@@ -642,7 +642,7 @@ public class GroupApiMockTest extends BaseAutoscaleApiMockTest {
       server.enqueue(addCommonHeaders(new MockResponse().setResponseCode(200)));
 
       try {
-         AutoscaleApi autoscaleApi = api(server.getUrl("/").toString(), "rackspace-autoscale", overrides);
+         AutoscaleApi autoscaleApi = api(server.url("/").toString(), "rackspace-autoscale", overrides);
          GroupApi api = autoscaleApi.getGroupApi("DFW");
 
          GroupConfiguration gc = GroupConfiguration.builder()
@@ -676,7 +676,7 @@ public class GroupApiMockTest extends BaseAutoscaleApiMockTest {
       server.enqueue(addCommonHeaders(new MockResponse().setResponseCode(404)));
 
       try {
-         AutoscaleApi autoscaleApi = api(server.getUrl("/").toString(), "rackspace-autoscale", overrides);
+         AutoscaleApi autoscaleApi = api(server.url("/").toString(), "rackspace-autoscale", overrides);
          GroupApi api = autoscaleApi.getGroupApi("DFW");
 
          GroupConfiguration gc = GroupConfiguration.builder()
@@ -710,7 +710,7 @@ public class GroupApiMockTest extends BaseAutoscaleApiMockTest {
       server.enqueue(addCommonHeaders(new MockResponse().setResponseCode(200)));
 
       try {
-         AutoscaleApi autoscaleApi = api(server.getUrl("/").toString(), "rackspace-autoscale", overrides);
+         AutoscaleApi autoscaleApi = api(server.url("/").toString(), "rackspace-autoscale", overrides);
          GroupApi api = autoscaleApi.getGroupApi("DFW");
 
          LaunchConfiguration lc = LaunchConfiguration.builder()
@@ -748,7 +748,7 @@ public class GroupApiMockTest extends BaseAutoscaleApiMockTest {
       server.enqueue(addCommonHeaders(new MockResponse().setResponseCode(404)));
 
       try {
-         AutoscaleApi autoscaleApi = api(server.getUrl("/").toString(), "rackspace-autoscale", overrides);
+         AutoscaleApi autoscaleApi = api(server.url("/").toString(), "rackspace-autoscale", overrides);
          GroupApi api = autoscaleApi.getGroupApi("DFW");
 
          LaunchConfiguration lc = LaunchConfiguration.builder()
