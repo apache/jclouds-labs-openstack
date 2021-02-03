@@ -44,8 +44,8 @@ import org.testng.annotations.Test;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.net.HttpHeaders;
-import com.squareup.okhttp.mockwebserver.MockResponse;
-import com.squareup.okhttp.mockwebserver.MockWebServer;
+import okhttp3.mockwebserver.MockResponse;
+import okhttp3.mockwebserver.MockWebServer;
 
 /**
  * Tests annotation parsing of {@code ServiceApi}
@@ -60,7 +60,7 @@ public class ServiceApiMockTest extends BasePoppyApiMockTest {
                         .setHeader(HttpHeaders.LOCATION, "https://poppycdn.org/v1.0/services/123123"));
 
       try {
-         PoppyApi poppyApi = api(server.getUrl("/").toString(), "openstack-poppy", overrides);
+         PoppyApi poppyApi = api(server.url("/").toString(), "openstack-poppy", overrides);
          ServiceApi api = poppyApi.getServiceApi();
 
          CreateService options = CreateService.builder()
@@ -104,7 +104,7 @@ public class ServiceApiMockTest extends BasePoppyApiMockTest {
             new MockResponse().setResponseCode(200).setBody(stringFromResource("/poppy_service_get_response.json"))));
 
       try {
-         PoppyApi poppyApi = api(server.getUrl("/").toString(), "openstack-poppy", overrides);
+         PoppyApi poppyApi = api(server.url("/").toString(), "openstack-poppy", overrides);
          ServiceApi api = poppyApi.getServiceApi();
 
          Service oneService = api.get("96737ae3-cfc1-4c72-be88-5d0e7cc9a3f0");
@@ -127,7 +127,7 @@ public class ServiceApiMockTest extends BasePoppyApiMockTest {
       server.enqueue(addCommonHeaders(new MockResponse().setResponseCode(200).setBody(stringFromResource("/poppy_service_list_response_paged2.json"))));
 
       try {
-         PoppyApi poppyApi = api(server.getUrl("/").toString(), "openstack-poppy", overrides);
+         PoppyApi poppyApi = api(server.url("/").toString(), "openstack-poppy", overrides);
          ServiceApi api = poppyApi.getServiceApi();
 
          // Note: Lazy! Have to actually look at the collection.
@@ -161,7 +161,7 @@ public class ServiceApiMockTest extends BasePoppyApiMockTest {
       server.enqueue(addCommonHeaders(new MockResponse().setResponseCode(200).setBody(stringFromResource("/poppy_service_list_response_paged1.json"))));
 
       try {
-         PoppyApi poppyApi = api(server.getUrl("/").toString(), "openstack-poppy", overrides);
+         PoppyApi poppyApi = api(server.url("/").toString(), "openstack-poppy", overrides);
          ServiceApi api = poppyApi.getServiceApi();
 
          PaginatedCollection<Service> services = api.list(PaginationOptions.Builder.limit(2).marker("abcdefg"));
@@ -191,7 +191,7 @@ public class ServiceApiMockTest extends BasePoppyApiMockTest {
             .setHeader(HttpHeaders.LOCATION, "https://poppycdn.org/v1.0/services/123123"));
 
       try {
-         PoppyApi poppyApi = api(server.getUrl("/").toString(), "openstack-poppy", overrides);
+         PoppyApi poppyApi = api(server.url("/").toString(), "openstack-poppy", overrides);
          ServiceApi api = poppyApi.getServiceApi();
 
          Service toUpdate = api.get("345345");
@@ -218,7 +218,7 @@ public class ServiceApiMockTest extends BasePoppyApiMockTest {
             new MockResponse().setResponseCode(200)));
 
       try {
-         PoppyApi poppyApi = api(server.getUrl("/").toString(), "openstack-poppy", overrides);
+         PoppyApi poppyApi = api(server.url("/").toString(), "openstack-poppy", overrides);
          ServiceApi api = poppyApi.getServiceApi();
 
          boolean result = api.delete("96737ae3-cfc1-4c72-be88-5d0e7cc9a3f0");
@@ -240,7 +240,7 @@ public class ServiceApiMockTest extends BasePoppyApiMockTest {
             new MockResponse().setResponseCode(200)));
 
       try {
-         PoppyApi poppyApi = api(server.getUrl("/").toString(), "openstack-poppy", overrides);
+         PoppyApi poppyApi = api(server.url("/").toString(), "openstack-poppy", overrides);
          ServiceApi api = poppyApi.getServiceApi();
 
          boolean result = api.deleteAsset("96737ae3-cfc1-4c72-be88-5d0e7cc9a3f0", "/images/1.jpg");
@@ -263,7 +263,7 @@ public class ServiceApiMockTest extends BasePoppyApiMockTest {
             new MockResponse().setResponseCode(200)));
 
       try {
-         PoppyApi poppyApi = api(server.getUrl("/").toString(), "openstack-poppy", overrides);
+         PoppyApi poppyApi = api(server.url("/").toString(), "openstack-poppy", overrides);
          ServiceApi api = poppyApi.getServiceApi();
 
          boolean result = api.deleteAssets("96737ae3-cfc1-4c72-be88-5d0e7cc9a3f0");

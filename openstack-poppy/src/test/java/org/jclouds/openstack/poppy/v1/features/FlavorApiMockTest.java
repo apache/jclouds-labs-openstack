@@ -25,8 +25,8 @@ import org.jclouds.openstack.poppy.v1.domain.Flavor;
 import org.jclouds.openstack.poppy.v1.internal.BasePoppyApiMockTest;
 import org.testng.annotations.Test;
 
-import com.squareup.okhttp.mockwebserver.MockResponse;
-import com.squareup.okhttp.mockwebserver.MockWebServer;
+import okhttp3.mockwebserver.MockResponse;
+import okhttp3.mockwebserver.MockWebServer;
 
 /**
  * Tests annotation parsing of {@code FlavorApi}
@@ -41,7 +41,7 @@ public class FlavorApiMockTest extends BasePoppyApiMockTest {
             new MockResponse().setResponseCode(200).setBody(stringFromResource("/poppy_flavor_list_response.json"))));
 
       try {
-         PoppyApi poppyApi = api(server.getUrl("/").toString(), "openstack-poppy", overrides);
+         PoppyApi poppyApi = api(server.url("/").toString(), "openstack-poppy", overrides);
          FlavorApi api = poppyApi.getFlavorApi();
 
          List<Flavor> flavors = api.list().toList();
@@ -64,7 +64,7 @@ public class FlavorApiMockTest extends BasePoppyApiMockTest {
             new MockResponse().setResponseCode(200).setBody(stringFromResource("/poppy_flavor_get_response.json"))));
 
       try {
-         PoppyApi poppyApi = api(server.getUrl("/").toString(), "openstack-poppy", overrides);
+         PoppyApi poppyApi = api(server.url("/").toString(), "openstack-poppy", overrides);
          FlavorApi api = poppyApi.getFlavorApi();
 
          Flavor oneFlavor  = api.get("cdn");
@@ -86,7 +86,7 @@ public class FlavorApiMockTest extends BasePoppyApiMockTest {
       server.enqueue(addCommonHeaders(new MockResponse().setResponseCode(404)));
 
       try {
-         PoppyApi poppyApi = api(server.getUrl("/").toString(), "openstack-poppy", overrides);
+         PoppyApi poppyApi = api(server.url("/").toString(), "openstack-poppy", overrides);
          FlavorApi api = poppyApi.getFlavorApi();
 
          Flavor oneFlavor  = api.get("cdn");

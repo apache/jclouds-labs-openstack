@@ -18,8 +18,8 @@ package org.jclouds.openstack.marconi.v1.features;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
-import com.squareup.okhttp.mockwebserver.MockResponse;
-import com.squareup.okhttp.mockwebserver.MockWebServer;
+import okhttp3.mockwebserver.MockResponse;
+import okhttp3.mockwebserver.MockWebServer;
 import org.jclouds.openstack.marconi.v1.MarconiApi;
 import org.jclouds.openstack.marconi.v1.domain.CreateMessage;
 import org.jclouds.openstack.marconi.v1.domain.Message;
@@ -47,7 +47,7 @@ public class MessageApiMockTest extends BaseOpenStackMockTest<MarconiApi> {
       server.enqueue(new MockResponse().setResponseCode(201).setBody("{\"partial\": false, \"resources\": [\"/v1/queues/jclouds-test/messages/526550ecef913e655ff84db8\"]}"));
 
       try {
-         MarconiApi api = api(server.getUrl("/").toString(), "openstack-marconi");
+         MarconiApi api = api(server.url("/").toString(), "openstack-marconi");
          MessageApi messageApi = api.getMessageApi("DFW", CLIENT_ID, "jclouds-test");
 
          String json1 = "{\"event\":{\"name\":\"Edmonton Java User Group\",\"attendees\":[\"bob\",\"jim\",\"sally\"]}}";
@@ -75,7 +75,7 @@ public class MessageApiMockTest extends BaseOpenStackMockTest<MarconiApi> {
       server.enqueue(new MockResponse().setResponseCode(201).setBody("{\"partial\": false, \"resources\": [\"/v1/queues/jclouds-test/messages/5265540ef4919b655da1760a\", \"/v1/queues/jclouds-test/messages/5265540ef4919b655da1760b\", \"/v1/queues/jclouds-test/messages/5265540ef4919b655da1760c\"]}"));
 
       try {
-         MarconiApi api = api(server.getUrl("/").toString(), "openstack-marconi");
+         MarconiApi api = api(server.url("/").toString(), "openstack-marconi");
          MessageApi messageApi = api.getMessageApi("DFW", CLIENT_ID, "jclouds-test");
 
          String json1 = "{\"event\":{\"name\":\"Austin Java User Group\",\"attendees\":[\"bob\",\"jim\",\"sally\"]}}";
@@ -109,7 +109,7 @@ public class MessageApiMockTest extends BaseOpenStackMockTest<MarconiApi> {
       server.enqueue(new MockResponse().setResponseCode(204));
 
       try {
-         MarconiApi api = api(server.getUrl("/").toString(), "openstack-marconi");
+         MarconiApi api = api(server.url("/").toString(), "openstack-marconi");
          MessageApi messageApi = api.getMessageApi("DFW", CLIENT_ID, "jclouds-test");
 
          MessageStream messageStream = messageApi.stream();
@@ -133,7 +133,7 @@ public class MessageApiMockTest extends BaseOpenStackMockTest<MarconiApi> {
       server.enqueue(new MockResponse().setResponseCode(204));
 
       try {
-         MarconiApi api = api(server.getUrl("/").toString(), "openstack-marconi");
+         MarconiApi api = api(server.url("/").toString(), "openstack-marconi");
          MessageApi messageApi = api.getMessageApi("DFW", CLIENT_ID, "jclouds-test");
 
          MessageStream messageStream = messageApi.stream();
@@ -165,7 +165,7 @@ public class MessageApiMockTest extends BaseOpenStackMockTest<MarconiApi> {
       server.enqueue(new MockResponse().setResponseCode(204));
 
       try {
-         MarconiApi api = api(server.getUrl("/").toString(), "openstack-marconi");
+         MarconiApi api = api(server.url("/").toString(), "openstack-marconi");
          MessageApi messageApi = api.getMessageApi("DFW", CLIENT_ID, "jclouds-test");
 
          MessageStream messageStream = messageApi.stream(limit(2));
@@ -196,7 +196,7 @@ public class MessageApiMockTest extends BaseOpenStackMockTest<MarconiApi> {
       server.enqueue(new MockResponse().setResponseCode(200).setBody("[{\"body\": \"{\\\"event\\\":{\\\"name\\\":\\\"SF Java User Group\\\",\\\"attendees\\\":[\\\"bob\\\",\\\"jim\\\",\\\"sally\\\"]}}\", \"age\": 1596, \"href\": \"/v1/queues/jclouds-test/messages/messages/52928896b04a584f24883227\", \"ttl\": 86400}, {\"body\": \"{\\\"event\\\":{\\\"name\\\":\\\"Austin Java User Group\\\",\\\"attendees\\\":[\\\"bob\\\",\\\"jim\\\",\\\"sally\\\"]}}\", \"age\": 1596, \"href\": \"/v1/queues/jclouds-test/messages/messages/52928896b04a584f24883228\", \"ttl\": 86400}, {\"body\": \"{\\\"event\\\":{\\\"name\\\":\\\"HK Java User Group\\\",\\\"attendees\\\":[\\\"bob\\\",\\\"jim\\\",\\\"sally\\\"]}}\", \"age\": 1596, \"href\": \"/v1/queues/jclouds-test/messages/messages/52928896b04a584f24883229\", \"ttl\": 86400}]"));
 
       try {
-         MarconiApi api = api(server.getUrl("/").toString(), "openstack-marconi");
+         MarconiApi api = api(server.url("/").toString(), "openstack-marconi");
          MessageApi messageApi = api.getMessageApi("DFW", CLIENT_ID, "jclouds-test");
          List<String> ids = ImmutableList.of("52928896b04a584f24883227", "52928896b04a584f24883228", "52928896b04a584f24883229");
 
@@ -226,7 +226,7 @@ public class MessageApiMockTest extends BaseOpenStackMockTest<MarconiApi> {
       server.enqueue(new MockResponse().setResponseCode(200).setBody("{\"body\": \"{\\\"event\\\":{\\\"name\\\":\\\"Edmonton Java User Group\\\",\\\"attendees\\\":[\\\"bob\\\",\\\"jim\\\",\\\"sally\\\"]}}\", \"age\": 266, \"href\": \"/v1/queues/jclouds-test/messages/5292b30cef913e6d026f4dec\", \"ttl\": 86400}"));
 
       try {
-         MarconiApi api = api(server.getUrl("/").toString(), "openstack-marconi");
+         MarconiApi api = api(server.url("/").toString(), "openstack-marconi");
          MessageApi messageApi = api.getMessageApi("DFW", CLIENT_ID, "jclouds-test");
 
          Message message = messageApi.get("5292b30cef913e6d026f4dec");
@@ -251,7 +251,7 @@ public class MessageApiMockTest extends BaseOpenStackMockTest<MarconiApi> {
       server.enqueue(new MockResponse().setResponseCode(204));
 
       try {
-         MarconiApi api = api(server.getUrl("/").toString(), "openstack-marconi");
+         MarconiApi api = api(server.url("/").toString(), "openstack-marconi");
          MessageApi messageApi = api.getMessageApi("DFW", CLIENT_ID, "jclouds-test");
          List<String> ids = ImmutableList.of("52936b8a3ac24e6ef4c067dd", "5292b30cef913e6d026f4dec");
 
@@ -274,7 +274,7 @@ public class MessageApiMockTest extends BaseOpenStackMockTest<MarconiApi> {
       server.enqueue(new MockResponse().setResponseCode(204));
 
       try {
-         MarconiApi api = api(server.getUrl("/").toString(), "openstack-marconi");
+         MarconiApi api = api(server.url("/").toString(), "openstack-marconi");
          MessageApi messageApi = api.getMessageApi("DFW", CLIENT_ID, "jclouds-test");
 
          boolean success = messageApi.deleteByClaim("52936b8a3ac24e6ef4c067dd", "5292b30cef913e6d026f4dec");

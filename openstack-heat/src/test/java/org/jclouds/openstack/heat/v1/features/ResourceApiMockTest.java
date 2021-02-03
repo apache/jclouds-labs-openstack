@@ -24,8 +24,8 @@ import org.jclouds.openstack.heat.v1.HeatApi;
 import org.jclouds.openstack.heat.v1.internal.BaseHeatApiMockTest;
 import org.testng.annotations.Test;
 
-import com.squareup.okhttp.mockwebserver.MockResponse;
-import com.squareup.okhttp.mockwebserver.MockWebServer;
+import okhttp3.mockwebserver.MockResponse;
+import okhttp3.mockwebserver.MockWebServer;
 
 /**
  * Tests annotation parsing of {@code ResourceApi}
@@ -40,7 +40,7 @@ public class ResourceApiMockTest extends BaseHeatApiMockTest {
             new MockResponse().setResponseCode(200).setBody(stringFromResource("/resource_type_list_response.json"))));
 
       try {
-         HeatApi heatApi = api(server.getUrl("/").toString(), "openstack-heat", overrides);
+         HeatApi heatApi = api(server.url("/").toString(), "openstack-heat", overrides);
          ResourceApi api = heatApi.getResourceApi("RegionOne");
 
          List<String> resourceTypes = api.listTypes();

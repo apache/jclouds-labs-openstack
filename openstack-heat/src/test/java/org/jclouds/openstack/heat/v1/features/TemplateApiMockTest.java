@@ -24,8 +24,8 @@ import org.jclouds.openstack.heat.v1.domain.Template;
 import org.jclouds.openstack.heat.v1.internal.BaseHeatApiMockTest;
 import org.testng.annotations.Test;
 
-import com.squareup.okhttp.mockwebserver.MockResponse;
-import com.squareup.okhttp.mockwebserver.MockWebServer;
+import okhttp3.mockwebserver.MockResponse;
+import okhttp3.mockwebserver.MockWebServer;
 
 /**
  * Tests annotation parsing of {@code StackApi}
@@ -40,7 +40,7 @@ public class TemplateApiMockTest extends BaseHeatApiMockTest {
             new MockResponse().setResponseCode(200).setBody(stringFromResource("/template_get_response.json"))));
 
       try {
-         HeatApi heatApi = api(server.getUrl("/").toString(), "openstack-heat", overrides);
+         HeatApi heatApi = api(server.url("/").toString(), "openstack-heat", overrides);
          TemplateApi api = heatApi.getTemplateApi("RegionOne");
 
          Template template = api.get("simple_stack", "3095aefc-09fb-4bc7-b1f0-f21a304e864c");
@@ -64,7 +64,7 @@ public class TemplateApiMockTest extends BaseHeatApiMockTest {
             new MockResponse().setResponseCode(200).setBody(stringFromResource("/template_validate_response.json"))));
 
       try {
-         HeatApi heatApi = api(server.getUrl("/").toString(), "openstack-heat", overrides);
+         HeatApi heatApi = api(server.url("/").toString(), "openstack-heat", overrides);
          TemplateApi api = heatApi.getTemplateApi("RegionOne");
 
          Template template = api.validate("https://examplevalidateurl.com/exampletemplate.json");

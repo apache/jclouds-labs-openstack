@@ -32,8 +32,8 @@ import org.testng.annotations.Test;
 import com.google.common.collect.FluentIterable;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
-import com.squareup.okhttp.mockwebserver.MockResponse;
-import com.squareup.okhttp.mockwebserver.MockWebServer;
+import okhttp3.mockwebserver.MockResponse;
+import okhttp3.mockwebserver.MockWebServer;
 
 /**
  * Tests WebhookApi Guice wiring and parsing
@@ -47,7 +47,7 @@ public class WebhookApiMockTest extends BaseAutoscaleApiMockTest {
       server.enqueue(addCommonHeaders(new MockResponse().setResponseCode(201).setBody(stringFromResource("/autoscale_webhook_create_response.json"))));
 
       try {
-         AutoscaleApi autoscaleApi = api(server.getUrl("/").toString(), "rackspace-autoscale", overrides);
+         AutoscaleApi autoscaleApi = api(server.url("/").toString(), "rackspace-autoscale", overrides);
          WebhookApi api = autoscaleApi.getWebhookApi("DFW", "1234567890", "321456");
 
          FluentIterable<Webhook> webhooks = api.create("PagerDuty", ImmutableMap.<String, Object>of("notes", "PagerDuty will fire this webhook"));
@@ -74,7 +74,7 @@ public class WebhookApiMockTest extends BaseAutoscaleApiMockTest {
       server.enqueue(addCommonHeaders(new MockResponse().setResponseCode(404).setBody(stringFromResource("/autoscale_webhook_create_response.json"))));
 
       try {
-         AutoscaleApi autoscaleApi = api(server.getUrl("/").toString(), "rackspace-autoscale", overrides);
+         AutoscaleApi autoscaleApi = api(server.url("/").toString(), "rackspace-autoscale", overrides);
          WebhookApi api = autoscaleApi.getWebhookApi("DFW", "1234567890", "321456");
 
          FluentIterable<Webhook> webhooks = api.create("PagerDuty", ImmutableMap.<String, Object>of("notes", "PagerDuty will fire this webhook"));
@@ -100,7 +100,7 @@ public class WebhookApiMockTest extends BaseAutoscaleApiMockTest {
       server.enqueue(addCommonHeaders(new MockResponse().setResponseCode(201).setBody(stringFromResource("/autoscale_webhooks_create_response.json"))));
 
       try {
-         AutoscaleApi autoscaleApi = api(server.getUrl("/").toString(), "rackspace-autoscale", overrides);
+         AutoscaleApi autoscaleApi = api(server.url("/").toString(), "rackspace-autoscale", overrides);
          WebhookApi api = autoscaleApi.getWebhookApi("DFW", "1234567890", "321456");
 
          FluentIterable<Webhook> webhooks = api.create(ImmutableList.of(
@@ -131,7 +131,7 @@ public class WebhookApiMockTest extends BaseAutoscaleApiMockTest {
       server.enqueue(addCommonHeaders(new MockResponse().setResponseCode(404).setBody(stringFromResource("/autoscale_webhooks_create_response.json"))));
 
       try {
-         AutoscaleApi autoscaleApi = api(server.getUrl("/").toString(), "rackspace-autoscale", overrides);
+         AutoscaleApi autoscaleApi = api(server.url("/").toString(), "rackspace-autoscale", overrides);
          WebhookApi api = autoscaleApi.getWebhookApi("DFW", "1234567890", "321456");
 
          FluentIterable<Webhook> webhooks = api.create(ImmutableList.of(
@@ -160,7 +160,7 @@ public class WebhookApiMockTest extends BaseAutoscaleApiMockTest {
       server.enqueue(addCommonHeaders(new MockResponse().setResponseCode(201).setBody(stringFromResource("/autoscale_webhook_list_response.json"))));
 
       try {
-         AutoscaleApi autoscaleApi = api(server.getUrl("/").toString(), "rackspace-autoscale", overrides);
+         AutoscaleApi autoscaleApi = api(server.url("/").toString(), "rackspace-autoscale", overrides);
          WebhookApi api = autoscaleApi.getWebhookApi("DFW", "1234567890", "321456");
 
          FluentIterable<Webhook> webhooks = api.list();
@@ -188,7 +188,7 @@ public class WebhookApiMockTest extends BaseAutoscaleApiMockTest {
       server.enqueue(addCommonHeaders(new MockResponse().setResponseCode(404).setBody(stringFromResource("/autoscale_webhook_list_response.json"))));
 
       try {
-         AutoscaleApi autoscaleApi = api(server.getUrl("/").toString(), "rackspace-autoscale", overrides);
+         AutoscaleApi autoscaleApi = api(server.url("/").toString(), "rackspace-autoscale", overrides);
          WebhookApi api = autoscaleApi.getWebhookApi("DFW", "1234567890", "321456");
 
          FluentIterable<Webhook> webhooks = api.list();
@@ -214,7 +214,7 @@ public class WebhookApiMockTest extends BaseAutoscaleApiMockTest {
       server.enqueue(addCommonHeaders(new MockResponse().setResponseCode(201)));
 
       try {
-         AutoscaleApi autoscaleApi = api(server.getUrl("/").toString(), "rackspace-autoscale", overrides);
+         AutoscaleApi autoscaleApi = api(server.url("/").toString(), "rackspace-autoscale", overrides);
          WebhookApi api = autoscaleApi.getWebhookApi("DFW", "1234567890", "321456");
 
          boolean success = api.update("5555", "alice", ImmutableMap.<String, Object>of("notes", "this is for Alice"));
@@ -240,7 +240,7 @@ public class WebhookApiMockTest extends BaseAutoscaleApiMockTest {
       server.enqueue(addCommonHeaders(new MockResponse().setResponseCode(404)));
 
       try {
-         AutoscaleApi autoscaleApi = api(server.getUrl("/").toString(), "rackspace-autoscale", overrides);
+         AutoscaleApi autoscaleApi = api(server.url("/").toString(), "rackspace-autoscale", overrides);
          WebhookApi api = autoscaleApi.getWebhookApi("DFW", "1234567890", "321456");
 
          boolean success = api.update("5555", "alice", ImmutableMap.<String, Object>of("notes", "this is for Alice"));
@@ -266,7 +266,7 @@ public class WebhookApiMockTest extends BaseAutoscaleApiMockTest {
       server.enqueue(addCommonHeaders(new MockResponse().setResponseCode(201).setBody(stringFromResource("/autoscale_webhook_get_response.json"))));
 
       try {
-         AutoscaleApi autoscaleApi = api(server.getUrl("/").toString(), "rackspace-autoscale", overrides);
+         AutoscaleApi autoscaleApi = api(server.url("/").toString(), "rackspace-autoscale", overrides);
          WebhookApi api = autoscaleApi.getWebhookApi("DFW", "1234567890", "321456");
 
          Webhook webhook = api.get("5555");
@@ -293,7 +293,7 @@ public class WebhookApiMockTest extends BaseAutoscaleApiMockTest {
       server.enqueue(addCommonHeaders(new MockResponse().setResponseCode(404).setBody(stringFromResource("/autoscale_webhook_get_response.json"))));
 
       try {
-         AutoscaleApi autoscaleApi = api(server.getUrl("/").toString(), "rackspace-autoscale", overrides);
+         AutoscaleApi autoscaleApi = api(server.url("/").toString(), "rackspace-autoscale", overrides);
          WebhookApi api = autoscaleApi.getWebhookApi("DFW", "1234567890", "321456");
 
          Webhook webhook = api.get("5555");
